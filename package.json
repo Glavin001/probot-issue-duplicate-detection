@@ -8,7 +8,7 @@
   "scripts": {
     "deploy": "now --alias=duplicate.probot.samuelattard.us",
     "start": "probot run ./src/index.js",
-    "now-start": "probot run ./src/index.js --private-key=prod.pem --integration=1862",
+    "now-start": "probot run ./src/index.js --private-key=prod.pem",
     "test": "xo --extend probot && mocha test/*-spec.js --timeout=10000"
   },
   "dependencies": {

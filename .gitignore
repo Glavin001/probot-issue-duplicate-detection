@@ -3,3 +3,4 @@ npm-debug.log
 prod.pem
 .env
 private-key.pem
+test/data/issues.json

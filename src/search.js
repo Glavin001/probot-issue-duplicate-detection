@@ -1,5 +1,6 @@
 const Fuze = require('fuse.js');
 const nlp = require('compromise');
+const debug = require('debug')('search');
 
 const remove = (value, arr, noReg) => {
   for (const repl of arr) {
@@ -34,8 +35,10 @@ const ignoredTerms = [
 ];
 
 module.exports = (allIssues, issueNumber, extraIgnoredTerms = []) => {
+  debug(`search through ${allIssues.length} issues`);
   const otherIssues = allIssues.filter(issue => issue.number !== issueNumber);
   const theIssue = allIssues.find(issue => issue.number === issueNumber);
+  debug("theIssue", issueNumber, theIssue);
 
   const fuse = new Fuze(otherIssues, {
     shouldSort: true,

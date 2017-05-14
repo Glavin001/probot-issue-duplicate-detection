@@ -1,8 +1,8 @@
 {
     "alias": [
-        "duplicate.probot.samuelattard.us"
     ],
     "files": [
+        "./.env",
         "./prod.pem",
         "./src/index.js",
         "./src/search.js",

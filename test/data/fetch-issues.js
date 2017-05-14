@@ -5,7 +5,7 @@ const fetch = require('node-fetch');
 const issues = [];
 
 const getPage = pageNum =>
-  fetch(`https://api.github.com/repos/MarshallOfSound/Google-Play-Music-Desktop-Player-UNOFFICIAL-/issues?state=all&per_page=100&page=${pageNum}`)
+  fetch(`https://api.github.com/repos/Glavin001/atom-beautify/issues?state=all&per_page=100&page=${pageNum}`)
     .then(r => r.json())
     .then(data => {
       if (data.length > 0) {
