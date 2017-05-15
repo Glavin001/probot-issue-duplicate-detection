@@ -6,17 +6,19 @@
   "license": "ISC",
   "repository": "MarshallOfSound/probot-issue-duplicate-detection",
   "scripts": {
-    "deploy": "now --alias=duplicate.probot.samuelattard.us",
     "start": "probot run ./src/index.js",
     "now-start": "probot run ./src/index.js --private-key=prod.pem",
-    "test": "xo --extend probot && mocha test/*-spec.js --timeout=10000"
+    "test": "xo --extend probot && mocha test/*-spec.js --timeout=10000",
+    "deploy": "now --env PRIVATE_KEY=\"$(cat ./prod.pem)\""
   },
   "dependencies": {
     "compromise": "^8.2.0",
     "debug": "^2.6.3",
     "fuse.js": "^2.6.2",
+    "lodash": "^4.17.4",
     "mustache": "^2.3.0",
-    "probot": "~0.3.0"
+    "probot": "~0.3.0",
+    "python-shell": "^0.4.0"
   },
   "devDependencies": {
     "chai": "^3.5.0",

@@ -1,11 +1,7 @@
 {
-    "alias": [
-    ],
-    "files": [
-        "./.env",
-        "./prod.pem",
-        "./src/index.js",
-        "./src/search.js",
-        "./src/template.md"
-    ]
+    "type": "docker",
+    "dotenv": true,
+    "env": {
+        "NODE_ENV": "production"
+    }
 }

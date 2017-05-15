@@ -30,7 +30,7 @@ module.exports = robot => {
     // Get all issues that aren't the new issue
     const allIssues = await github.paginate(github.issues.getForRepo(context.repo({ state: "all", per_page: 100 })), issues => issues);
 
-    const results = search(allIssues, context.issue().number);
+    const results = await search(allIssues, context.issue().number);
 
     debug(`found ${results.length} potential duplicates`);
 
@@ -46,10 +46,11 @@ module.exports = robot => {
         // It doesn't have one, so let's use the default
         template = defaultTemplate;
       }
-
       const commentBody = mustache.render(template, {
         payload: event.payload,
-        issues: results.slice(0, 3)
+        issues: results.map(issue => Object.assign({}, issue, {
+          score: (issue.score*100).toFixed(2)
+        }))
       });
 
       await github.issues.createComment(context.issue({ body: commentBody }));
