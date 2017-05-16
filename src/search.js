@@ -1,8 +1,7 @@
-const Fuze = require('fuse.js');
-const nlp = require('compromise');
+const _ = require('lodash');
 const debug = require('debug')('search');
 const { issueSimilarities } = require('./classifier');
-const _ = require('lodash');
+const Issue = require('./models/Issue');
 
 module.exports = async (allIssues, issueNumber, extraIgnoredTerms = []) => {
   debug(`search through ${allIssues.length} issues`);
@@ -11,16 +10,7 @@ module.exports = async (allIssues, issueNumber, extraIgnoredTerms = []) => {
   debug("theIssue", issueNumber, theIssue);
   const issueMap = _.keyBy(allIssues, 'number');
 
-  const allSimilaritiesMap = await issueSimilarities(allIssues.map(issue => ({
-    id: issue.id,
-    number: issue.number,
-    state: issue.state,
-    title: expandContractions(issue.title),
-    body: expandContractions(issue.body),
-    labels: issue.labels.map(label => label.name),
-    milestone: issue.milestone && issue.milestone.title,
-  })));
-  // return similarities;
+  const allSimilaritiesMap = await issueSimilarities(Issue.convert(allIssues));
   debug("similarities", allSimilaritiesMap);
   const similarMap = allSimilaritiesMap[issueNumber] || {};
   const similarIssues = _.chain(similarMap)
@@ -36,9 +26,3 @@ module.exports = async (allIssues, issueNumber, extraIgnoredTerms = []) => {
     ;
   return similarIssues;
 };
-
-function expandContractions(text) {
-  const cleanText = nlp(text);
-  cleanText.contractions().expand();
-  return cleanText.out('text');
-}

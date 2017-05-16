@@ -14,7 +14,6 @@
   "dependencies": {
     "compromise": "^8.2.0",
     "debug": "^2.6.3",
-    "fuse.js": "^2.6.2",
     "lodash": "^4.17.4",
     "mustache": "^2.3.0",
     "probot": "~0.3.0",

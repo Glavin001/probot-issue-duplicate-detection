@@ -3,8 +3,8 @@
 const PythonShell = require('python-shell');
 const path = require('path');
 
-function _run(data) {
-  return new Promise((resolve, reject) => {
+async function _run(data) {
+  return await new Promise((resolve, reject) => {
 
     // TODO: Use Pool of PythonShell workers
     var pyshell = new PythonShell('bin.py', {
@@ -31,20 +31,20 @@ function _run(data) {
   });
 }
 
-function train(trainType, data) {
+async function train(trainType, data) {
   // console.log('Training',trainType,data);
-  return _run([
+  return await _run([
     "train_"+trainType,
     data
   ]);
 }
 
-function predictIssueLabels(user, repo, issue) {
-  return predictIssuesLabels(user, repo, [issue]);
+async function predictIssueLabels(user, repo, issue) {
+  return await predictIssuesLabels(user, repo, [issue]);
 }
 
-function predictIssuesLabels(user, repo, issues) {
-  return _run([
+async function predictIssuesLabels(user, repo, issues) {
+  return await _run([
     "predict_labels",
     [
       user, repo, issues
@@ -52,8 +52,8 @@ function predictIssuesLabels(user, repo, issues) {
   ]);
 }
 
-function issueSimilarities(issues) {
-  return _run([
+async function issueSimilarities(issues) {
+  return await _run([
     'similarity',
     [issues]
   ]);
