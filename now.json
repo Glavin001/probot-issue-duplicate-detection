@@ -1,6 +1,7 @@
 {
     "type": "docker",
     "dotenv": true,
+    "public": true,
     "env": {
         "NODE_ENV": "production"
     }

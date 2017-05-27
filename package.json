@@ -6,17 +6,18 @@
   "license": "ISC",
   "repository": "MarshallOfSound/probot-issue-duplicate-detection",
   "scripts": {
-    "start": "probot run ./src/index.js",
-    "now-start": "probot run ./src/index.js --private-key=prod.pem",
+    "start": "echo $PRIVATE_KEY && probot run ./src/index.js",
+    "now-start": "probot run ./src/index.js",
     "test": "xo --extend probot && mocha test/*-spec.js --timeout=10000",
-    "deploy": "now --env PRIVATE_KEY=\"$(cat ./prod.pem)\""
+    "deploy": "now --public --env PRIVATE_KEY=\"$(cat ./prod.pem)\"",
+    "up": "PRIVATE_KEY=\"$(cat ./prod.pem)\" docker-compose up --build -d"
   },
   "dependencies": {
     "compromise": "^8.2.0",
     "debug": "^2.6.3",
     "lodash": "^4.17.4",
     "mustache": "^2.3.0",
-    "probot": "~0.3.0",
+    "probot": "~0.5.0",
     "python-shell": "^0.4.0"
   },
   "devDependencies": {

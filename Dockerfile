@@ -1,4 +1,4 @@
-FROM glavin001/alpine-python2-numpy-scipy
+FROM glavin001/alpine-python2-numpy-scipy:latest
 MAINTAINER Glavin Wiechert <glavin.wiechert@gmail.com>
 
 # Defines our working directory in container

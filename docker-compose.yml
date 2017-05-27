@@ -7,3 +7,10 @@ services:
     build: .
     ports:
       - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - LOG_LEVEL=trace
+      - INTEGRATION_ID=2352
+      - WEBHOOK_SECRET=issues!
+      - DEBUG=*
+      - PRIVATE_KEY
